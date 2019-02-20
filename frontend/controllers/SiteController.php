@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use RandomNumberService;
 use Yii;
+use yii\base\DynamicModel;
 use yii\base\InvalidArgumentException;
 use yii\base\Module;
 use yii\web\BadRequestHttpException;
@@ -77,20 +78,28 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
-     *
+     * Displays homepage
+     * @param int $pageNumber
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($pageNumber)
     {
 //        return $this->render('index');
+        $pageNumberForm = new DynamicModel(['pageNumber']);
+        $pageNumberForm->addRule('pageNumber', 'required');
+        $pageNumberForm->addRule('pageNumber', 'integer', ['min' => 1, 'max' => 1000000]);
+        $pageNumberForm->pageNumber = $pageNumber;
+        if ($pageNumberForm->validate()) {
+            return $this->randomNumberService->getArrayOfValues(5);
+        }
+//        $this->randomNumberService
+
 
     }
 
 
     /**
      * Logs in a user.
-     *
      * @return mixed
      */
     public function actionLogin()

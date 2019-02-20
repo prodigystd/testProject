@@ -19,18 +19,24 @@ class RandomNumberService
         $this->redis = \Yii::$app->redis;
     }
 
-
-    public function getCachedRandomValue($Rn) //R1, R2, .. Rn
+    // param 'R1', 'R2', .. 'Rn'
+    public function getCachedValue(String $Rn): int
     {
-//        $this->redis->getOrSet($Rn,)
-
+        return $this->redis->getOrSet($Rn, function () {
+            return random_int(1, 100);
+        }, 60);
     }
 
 
-
-
-
-
+    public function getArrayOfValues($size): array
+    {
+        $values = [];
+        for ($n = 1; $n < $size; $n++) {
+            $randKey = 'R' . $n;
+            $values[$randKey] = $this->getCachedValue($randKey);
+        }
+        return $values;
+    }
 
 
 }
