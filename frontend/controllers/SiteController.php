@@ -1,8 +1,11 @@
 <?php
+
 namespace frontend\controllers;
 
+use RandomNumberService;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\base\Module;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -18,6 +21,14 @@ use frontend\models\ContactForm;
  */
 class SiteController extends Controller
 {
+    private $randomNumberService;
+
+    public function __construct(string $id, RandomNumberService $randomNumberService, Module $module, array $config = [])
+    {
+        $this->randomNumberService = $randomNumberService;
+        parent::__construct($id, $module, $config);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -25,7 +36,7 @@ class SiteController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'only' => ['logout', 'signup'],
                 'rules' => [
                     [
@@ -41,7 +52,7 @@ class SiteController extends Controller
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'logout' => ['post'],
                 ],
@@ -72,7 +83,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+//        return $this->render('index');
+
     }
 
 
