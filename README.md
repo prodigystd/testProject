@@ -44,6 +44,9 @@ I2 - инкремент для страницы N так же для всех п
 
  git clone https://github.com/prodigystd/testProject.git
  
+В файле: vagrant/config/vagrant-local.example.yml выставить свой токен
+ github_token: <your-personal-github-token>
+ 
 Затем в папке проекта выполнить:
 
 vagrant up
