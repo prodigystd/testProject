@@ -36,6 +36,7 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'urlManager' => require __DIR__ . '/urlManager.php',
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

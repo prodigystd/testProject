@@ -31,7 +31,7 @@ class RandomNumberService
     public function getArrayOfValues($size): array
     {
         $values = [];
-        for ($n = 1; $n < $size; $n++) {
+        for ($n = 1; $n <= $size; $n++) {
             $randKey = 'R' . $n;
             $values[$randKey] = $this->getCachedValue($randKey);
         }

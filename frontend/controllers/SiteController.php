@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\repositories\IRepository;
 use common\services\RandomNumberService;
 use Yii;
 use yii\base\DynamicModel;
@@ -23,10 +24,13 @@ use frontend\models\ContactForm;
 class SiteController extends Controller
 {
     private $randomNumberService;
+    private $iRepository;
 
-    public function __construct(string $id, Module $module, RandomNumberService $randomNumberService, array $config = [])
+    public function __construct(string $id, Module $module, RandomNumberService $randomNumberService,
+                                IRepository $iRepository, array $config = [])
     {
         $this->randomNumberService = $randomNumberService;
+        $this->iRepository = $iRepository;
         parent::__construct($id, $module, $config);
     }
 
@@ -84,16 +88,17 @@ class SiteController extends Controller
      */
     public function actionIndex($pageNumber)
     {
-        $Rvalues = [];
-
         $pageNumberForm = new DynamicModel(['pageNumber']);
         $pageNumberForm->addRule('pageNumber', 'required');
         $pageNumberForm->addRule('pageNumber', 'integer', ['min' => 1, 'max' => 1000000]);
         $pageNumberForm->pageNumber = $pageNumber;
 
+        $Rvalues = [];
         if ($pageNumberForm->validate()) {
+            $this->iRepository->increment($pageNumber);
             $Rvalues = $this->randomNumberService->getArrayOfValues(5);
         }
+
         return $this->render('index', [
             'Rvalues' => $Rvalues
         ]);
