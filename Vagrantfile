@@ -8,7 +8,7 @@ end
 
 domains = {
   frontend: 'domain.test',
-  backend:  'y2aa-backend.test'
+  backend:  'testProject-backend.test'
 }
 
 config = {
