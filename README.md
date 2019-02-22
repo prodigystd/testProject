@@ -46,7 +46,7 @@ I2 - инкремент для страницы N так же для всех п
  
 В файле: vagrant/config/vagrant-local.yml выставить свой токен
 
- github_token: <your-personal-github-token>
+ github_token: your-personal-github-token
  
 Затем в папке проекта выполнить:
 
