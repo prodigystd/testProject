@@ -88,6 +88,7 @@ class SiteController extends Controller
      * Displays homepage
      * @param int $pageNumber
      * @return mixed
+     * @throws \yii\web\NotFoundHttpException
      */
     public function actionIndex($pageNumber)
     {
@@ -96,22 +97,23 @@ class SiteController extends Controller
         $pageNumberForm->addRule('pageNumber', 'integer', ['min' => 1, 'max' => 1000000]);
         $pageNumberForm->pageNumber = $pageNumber;
 
-        $Rvalues = [];
-        if ($pageNumberForm->validate()) {
-            $this->iRepository->increment($pageNumber);
-            $Rvalues = $this->randomNumberService->getArrayOfValues(5);
-            JSONLog::log(
-                $pageNumber,
-                array_values($Rvalues),
-                I1Table::getInstance()->value,
-                I2Table::getByPageId($pageNumber)->value
-            );
+        if (!$pageNumberForm->validate()) {
+            throw new \yii\web\NotFoundHttpException('Page is not found');
         }
+
+        $Rvalues = $this->randomNumberService->getArrayOfValues(5);
+        $this->iRepository->increment($pageNumber);
+
+        JSONLog::log(
+            $pageNumber,
+            array_values($Rvalues),
+            I1Table::getInstance()->value,
+            I2Table::getByPageId($pageNumber)->value
+        );
 
         return $this->render('index', [
             'Rvalues' => $Rvalues
         ]);
-
     }
 
 
