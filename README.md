@@ -40,7 +40,7 @@ I2 - инкремент для страницы N так же для всех п
 
 Установка: установить vagrant, virtualbox
 
-В команндной строке выполнить:
+В командной строке выполнить:
 
  git clone https://github.com/prodigystd/testProject.git
  
