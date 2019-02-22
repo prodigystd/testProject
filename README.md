@@ -44,6 +44,6 @@ I2 - инкремент для страницы N так же для всех п
 
  git clone https://github.com/prodigystd/testProject.git
  
-Затем в этой же папке выполнить:
+Затем в папке проекта выполнить:
 
 vagrant up
