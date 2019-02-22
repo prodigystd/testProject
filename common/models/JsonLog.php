@@ -38,7 +38,7 @@ class JSONLog
     public function save()
     {
         $jsonContent = Json::encode($this);
-        $jsonFile = Yii::getAlias('@webroot/assets/log.json');
+        $jsonFile = Yii::getAlias('@webroot/../../log.json');
         $fp = fopen($jsonFile, 'a');
         fwrite($fp, $jsonContent . PHP_EOL);
         fclose($fp);
