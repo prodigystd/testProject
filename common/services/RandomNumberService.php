@@ -5,7 +5,7 @@
  * Date: 20.02.2019
  * Time: 10:08
  */
-
+namespace common\services;
 /**
  * Class RandomNumberService
  * @property \yii\redis\Cache $redis

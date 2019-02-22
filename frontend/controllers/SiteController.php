@@ -2,7 +2,7 @@
 
 namespace frontend\controllers;
 
-use RandomNumberService;
+use common\services\RandomNumberService;
 use Yii;
 use yii\base\DynamicModel;
 use yii\base\InvalidArgumentException;
@@ -24,7 +24,7 @@ class SiteController extends Controller
 {
     private $randomNumberService;
 
-    public function __construct(string $id, RandomNumberService $randomNumberService, Module $module, array $config = [])
+    public function __construct(string $id, Module $module, RandomNumberService $randomNumberService, array $config = [])
     {
         $this->randomNumberService = $randomNumberService;
         parent::__construct($id, $module, $config);
