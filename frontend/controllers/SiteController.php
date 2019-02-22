@@ -100,15 +100,13 @@ class SiteController extends Controller
         if ($pageNumberForm->validate()) {
             $this->iRepository->increment($pageNumber);
             $Rvalues = $this->randomNumberService->getArrayOfValues(5);
-
+            JSONLog::log(
+                $pageNumber,
+                array_values($Rvalues),
+                I1Table::getInstance()->value,
+                I2Table::getByPageId($pageNumber)->value
+            );
         }
-
-        JSONLog::log(
-            $pageNumber,
-            array_values($Rvalues),
-            I1Table::getInstance()->value,
-            I2Table::getByPageId($pageNumber)->value
-        );
 
         return $this->render('index', [
             'Rvalues' => $Rvalues
