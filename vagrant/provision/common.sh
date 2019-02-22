@@ -18,3 +18,5 @@ composer update
 
 info "Init app as Development"
  php init --env=Development --overwrite=All
+info "Apply migrations"
+php yii migrate --interactive=0
