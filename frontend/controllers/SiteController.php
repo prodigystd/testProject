@@ -2,6 +2,9 @@
 
 namespace frontend\controllers;
 
+use common\models\I1Table;
+use common\models\I2Table;
+use common\models\JSONLog;
 use common\repositories\IRepository;
 use common\services\RandomNumberService;
 use Yii;
@@ -97,7 +100,15 @@ class SiteController extends Controller
         if ($pageNumberForm->validate()) {
             $this->iRepository->increment($pageNumber);
             $Rvalues = $this->randomNumberService->getArrayOfValues(5);
+
         }
+
+        JSONLog::log(
+            $pageNumber,
+            array_values($Rvalues),
+            I1Table::getInstance()->value,
+            I2Table::getByPageId($pageNumber)->value
+        );
 
         return $this->render('index', [
             'Rvalues' => $Rvalues
