@@ -1,6 +1,9 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $Rvalues array */
+
+
 
 $this->title = 'My Yii Application';
 ?>
@@ -9,7 +12,15 @@ $this->title = 'My Yii Application';
     <div class="jumbotron">
         <h1>Congratulations!</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <table><tr>
+        <?php
+        foreach ($Rvalues as $rKey => $rValue)
+        {
+            echo "<th> $rKey </th>";
+            echo "<tr> $rValue </tr>";
+        }
+        ?></tr></table>
+
 
         <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
     </div>

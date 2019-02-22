@@ -1,6 +1,6 @@
 <?php
 
-use yii\caching\Cache;
+use yii\redis\Cache;
 
 return [
     'aliases' => [

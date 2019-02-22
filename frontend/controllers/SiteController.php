@@ -84,16 +84,19 @@ class SiteController extends Controller
      */
     public function actionIndex($pageNumber)
     {
-//        return $this->render('index');
+        $Rvalues = [];
+
         $pageNumberForm = new DynamicModel(['pageNumber']);
         $pageNumberForm->addRule('pageNumber', 'required');
         $pageNumberForm->addRule('pageNumber', 'integer', ['min' => 1, 'max' => 1000000]);
         $pageNumberForm->pageNumber = $pageNumber;
-        if ($pageNumberForm->validate()) {
-            return $this->randomNumberService->getArrayOfValues(5);
-        }
-//        $this->randomNumberService
 
+        if ($pageNumberForm->validate()) {
+            $Rvalues = $this->randomNumberService->getArrayOfValues(5);
+        }
+        return $this->render('index', [
+            'Rvalues' => $Rvalues
+        ]);
 
     }
 
